@@ -8,10 +8,10 @@ public class SpawnDice : MonoBehaviour
     public GameObject[] dicePrefabs;
     public Transform spawnOrigin;
     private InputDevice device;
-    private List<GameObject> SpawnedObjects = new List<GameObject>();
+    private List<GameObject> SpawnedObjects = new();
     private Vector3[] dicePositionOffsets;
-    private float RADIUS = 0.15f;
-    private float ARC = 35f;
+    private const float RADIUS = 0.15f;
+    private const float ARC = 35f;
 
     private void Start()
     {

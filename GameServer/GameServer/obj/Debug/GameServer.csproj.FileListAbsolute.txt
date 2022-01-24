@@ -1,0 +1,6 @@
+/Users/conorkelleher/workspace/vrpg/GameServer/GameServer/bin/Debug/GameServer.exe
+/Users/conorkelleher/workspace/vrpg/GameServer/GameServer/bin/Debug/GameServer.pdb
+/Users/conorkelleher/workspace/vrpg/GameServer/GameServer/obj/Debug/GameServer.csproj.AssemblyReference.cache
+/Users/conorkelleher/workspace/vrpg/GameServer/GameServer/obj/Debug/GameServer.csproj.CoreCompileInputs.cache
+/Users/conorkelleher/workspace/vrpg/GameServer/GameServer/obj/Debug/GameServer.exe
+/Users/conorkelleher/workspace/vrpg/GameServer/GameServer/obj/Debug/GameServer.pdb
