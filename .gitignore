@@ -67,10 +67,9 @@ crashlytics-build.properties
 # Packed Addressables
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
-/GameServer/bin/
 GameServer/GameServer/obj/
+GameServer/GameServer/bin/
 
-GameServer/GameServer/obj/Debug/GameServer.csproj.AssemblyReference.cache
 
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
