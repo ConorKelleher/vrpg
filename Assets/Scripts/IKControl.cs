@@ -18,6 +18,7 @@ public class IKControl : MonoBehaviour
     private Vector3 startSpineUp;
     private Quaternion startRotationBetween;
     private Quaternion spineStartRotation;
+    private Quaternion spineLocalRotationIKGoal;
     private float headToChestOffset;
 
     void Start()
@@ -45,7 +46,10 @@ public class IKControl : MonoBehaviour
 
         Vector3 torsoLine = spineBone.position - headBone.position;
         Quaternion newRotationBetween = Quaternion.FromToRotation(startSpineUp, torsoLine);
+        Quaternion rotationBefore = spineBone.rotation;
         spineBone.rotation = (newRotationBetween * Quaternion.Inverse(startRotationBetween)) * spineStartRotation;
+        spineLocalRotationIKGoal = spineBone.localRotation;
+        spineBone.rotation = rotationBefore;
 
         // Headbone will have moved due to above rotation, so need to RE-set the position to match goal
         spineBone.position = headTarget.position + torsoLine.normalized * headToChestOffset;
@@ -59,6 +63,9 @@ public class IKControl : MonoBehaviour
     void OnAnimatorIK()
     {
         SetWeights();
+
+        animator.SetBoneLocalRotation(HumanBodyBones.Spine, spineLocalRotationIKGoal);
+
         animator.SetLookAtPosition(headTarget.position + headTarget.forward);
 
         // Set the right hand target position and rotation

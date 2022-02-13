@@ -716,7 +716,7 @@ MonoBehaviour:
   - {fileID: 1904892159101829717, guid: a37da288c3d92bc4bbe5793c1c127be2, type: 3}
   - {fileID: 8674968321780887580, guid: dd9b83bcec08fb847a490b88354463c5, type: 3}
   - {fileID: 7707825150231507798, guid: 79da831312d618548bfd490a74ea9850, type: 3}
-  spawnOrigin: {fileID: 1241563845}
+  spawnOrigin: {fileID: 1047628765485338180}
 --- !u!1 &599916901
 GameObject:
   m_ObjectHideFlags: 0
@@ -1076,8 +1076,8 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.03
-  far clip plane: 1000
+  near clip plane: 0.05
+  far clip plane: 10
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -4879,7 +4879,7 @@ MonoBehaviour:
   - {fileID: 1904892159101829717, guid: a37da288c3d92bc4bbe5793c1c127be2, type: 3}
   - {fileID: 8674968321780887580, guid: dd9b83bcec08fb847a490b88354463c5, type: 3}
   - {fileID: 7707825150231507798, guid: 79da831312d618548bfd490a74ea9850, type: 3}
-  spawnOrigin: {fileID: 1241563667}
+  spawnOrigin: {fileID: 1500165918493072197}
 --- !u!1 &1837010580
 GameObject:
   m_ObjectHideFlags: 0
@@ -4957,7 +4957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!20 &1872381854
 Camera:
   m_ObjectHideFlags: 0
@@ -4965,7 +4965,7 @@ Camera:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872381852}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_ClearFlags: 1
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
