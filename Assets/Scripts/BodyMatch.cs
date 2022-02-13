@@ -31,9 +31,9 @@ public class BodyMatch : MonoBehaviour
         HeadTarget.position = HeadController.position;
 
         RightHandTarget.position = RightHandController.position;
-        LeftHandTarget.position = LeftHandController.position;
-
         RightHandTarget.rotation = RightHandController.rotation;
+
+        LeftHandTarget.position = LeftHandController.position;
         LeftHandTarget.rotation = LeftHandController.rotation;
     }
 }

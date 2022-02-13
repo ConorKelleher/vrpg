@@ -11,9 +11,4 @@ public class HMDInfoManager : MonoBehaviour
         Debug.Log("Is Device Active " + XRSettings.isDeviceActive);
         Debug.Log("Device Name is : " + XRSettings.loadedDeviceName);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 }

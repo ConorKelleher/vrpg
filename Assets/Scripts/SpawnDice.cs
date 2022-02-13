@@ -21,7 +21,6 @@ public class SpawnDice : MonoBehaviour
         for (int i = 0; i < dicePositionOffsets.Length; i++)
         {
             float arcAngle = ARC * (i - midIndex);
-            Debug.Log(arcAngle);
             dicePositionOffsets[i] = Quaternion.Euler(0, 180, arcAngle) * radialOffset;
         }
     }
@@ -133,7 +132,6 @@ public class SpawnDice : MonoBehaviour
 
     void Despawn()
     {
-        Debug.Log("Calling despawn");
         foreach (GameObject spawnedObject in SpawnedObjects)
         {
             GameObject.Destroy(spawnedObject);
