@@ -55,6 +55,7 @@ public class Client : MonoBehaviour
 
         public void Connect()
         {
+            Debug.Log("1");
             socket = new TcpClient
             {
                 ReceiveBufferSize = dataBufferSize,
@@ -62,17 +63,20 @@ public class Client : MonoBehaviour
             };
 
             receiveBuffer = new byte[dataBufferSize];
+            Debug.Log("2");
             socket.BeginConnect(instance.ip, instance.port, ConnectCallback, socket);
         }
 
         private void ConnectCallback(IAsyncResult _result)
         {
+            Debug.Log("3");
             socket.EndConnect(_result);
             if (!socket.Connected)
             {
+                Debug.Log("4");
                 return;
             }
-
+            Debug.Log("5");
             stream = socket.GetStream();
 
             receivedData = new Packet();
@@ -80,13 +84,30 @@ public class Client : MonoBehaviour
             stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
         }
 
+        public void SendData(Packet _packet)
+        {
+            try
+            {
+                if (socket != null)
+                {
+                    stream.BeginWrite(_packet.ToArray(), 0, _packet.Length(), null, null);
+                }
+            }
+            catch (Exception _ex)
+            {
+                Debug.Log($"Error sending data to server via TCP: {_ex}");
+            }
+        }
+
         private void ReceiveCallback(IAsyncResult _result)
         {
+            Debug.Log("6");
             try
             {
                 int _byteLength = stream.EndRead(_result);
                 if (_byteLength <= 0)
                 {
+                    Debug.Log("7");
                     // TODO: disconnect
                     return;
                 }
@@ -95,10 +116,12 @@ public class Client : MonoBehaviour
                 Array.Copy(receiveBuffer, _data, _byteLength);
 
                 receivedData.Reset(HandleData(_data));
+                Debug.Log("8");
                 stream.BeginRead(receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
             }
             catch
             {
+                Debug.Log("9");
                 // TODO: disconnect
             }
         }
