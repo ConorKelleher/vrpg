@@ -4,33 +4,36 @@ using UnityEngine;
 
 public class BodyMatch : MonoBehaviour
 {
-    public Transform HeadBone;
+    public Transform HeadTarget;
     public Transform TorsoBone;
-    public Transform RightHandBone;
-    public Transform LeftHandBone;
+    public Transform RightHandTarget;
+    public Transform LeftHandTarget;
     public Transform HeadController;
     public Transform RightHandController;
     public Transform LeftHandController;
-    private Quaternion HeadBoneStartRotation;
+    private Quaternion HeadTargetStartRotation;
     private Quaternion HeadControllerStartRotation;
 
     private void Start()
     {
         HeadControllerStartRotation = HeadController.rotation;
-        HeadBoneStartRotation = HeadBone.rotation;
+        HeadTargetStartRotation = HeadTarget.rotation;
+        HeadTarget.parent = null;
+        LeftHandTarget.parent = null;
+        RightHandTarget.parent = null;
     }
 
     // Update is called once per frame
     void Update()
     {
         Quaternion diff = Quaternion.Inverse(HeadControllerStartRotation) * HeadController.rotation;
-        HeadBone.rotation = diff * HeadBoneStartRotation;
-        HeadBone.position = HeadController.position;
+        HeadTarget.rotation = diff * HeadTargetStartRotation;
+        HeadTarget.position = HeadController.position;
 
-        RightHandBone.position = RightHandController.position;
-        LeftHandBone.position = LeftHandController.position;
+        RightHandTarget.position = RightHandController.position;
+        RightHandTarget.rotation = RightHandController.rotation;
 
-        RightHandBone.rotation = RightHandController.rotation;
-        LeftHandBone.rotation = LeftHandController.rotation;
+        LeftHandTarget.position = LeftHandController.position;
+        LeftHandTarget.rotation = LeftHandController.rotation;
     }
 }

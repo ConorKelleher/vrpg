@@ -1,16 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class SpawnDice : MonoBehaviour
 {
     public GameObject[] dicePrefabs;
     public Transform spawnOrigin;
-    private InputDevice device;
     private List<GameObject> SpawnedObjects = new List<GameObject>();
-    private Vector3[] dicePositionOffsets;
-    private const float RADIUS = 0.15f;
+    public Vector3[] dicePositionOffsets;
+    private const float RADIUS = 15f;
     private const float ARC = 35f;
 
     private void Start()
@@ -21,67 +18,22 @@ public class SpawnDice : MonoBehaviour
         for (int i = 0; i < dicePositionOffsets.Length; i++)
         {
             float arcAngle = ARC * (i - midIndex);
-            Debug.Log(arcAngle);
             dicePositionOffsets[i] = Quaternion.Euler(0, 180, arcAngle) * radialOffset;
         }
+        Debug.Log(dicePositionOffsets.Length);
     }
 
-    void OnEnable()
+    public void SetPressing(bool pressing)
     {
-        List<InputDevice> allDevices = new List<InputDevice>();
-        InputDevices.GetDevices(allDevices);
-        foreach (InputDevice device in allDevices)
-            InputDevices_deviceConnected(device);
-
-        InputDevices.deviceConnected += InputDevices_deviceConnected;
-        InputDevices.deviceDisconnected += InputDevices_deviceDisconnected;
-    }
-
-    private void OnDisable()
-    {
-        InputDevices.deviceConnected -= InputDevices_deviceConnected;
-        InputDevices.deviceDisconnected -= InputDevices_deviceDisconnected;
-    }
-
-    private InputDevice GetCorrectHand()
-    {
-        return gameObject.name == "RightController" ? UnityEngine.XR.InputDevices.GetDeviceAtXRNode(UnityEngine.XR.XRNode.RightHand) : UnityEngine.XR.InputDevices.GetDeviceAtXRNode(UnityEngine.XR.XRNode.LeftHand);
-    }
-
-    private void InputDevices_deviceConnected(InputDevice device)
-    {
-        InputDevice correctHand = GetCorrectHand();
-
-        if (correctHand == device)
-        {
-            this.device = device;
-        }
-    }
-
-    private void InputDevices_deviceDisconnected(InputDevice device)
-    {
-        InputDevice correctHand = GetCorrectHand();
-
-        if (correctHand == device)
-        {
-            //this.device = null;
-        }
-    }
-
-    void Update()
-    {
-        bool pressing;
-        device.TryGetFeatureValue(UnityEngine.XR.CommonUsages.primaryButton, out pressing);
-
         if (pressing && SpawnedObjects.Count == 0)
         {
             Spawn();
         }
 
-        if (!pressing && SpawnedObjects.Count > 0)
-        {
-            Despawn();
-        }
+        //if (!pressing && SpawnedObjects.Count > 0)
+        //{
+        //    Despawn();
+        //}
     }
 
     void PrepareSpawnedDie(GameObject spawnedDie)
@@ -110,19 +62,21 @@ public class SpawnDice : MonoBehaviour
         }
     }
 
-    void Spawn()
+    public void Spawn()
     {
+        Debug.Log("Spawning");
         int prefabIndex = 0;
         Vector3 originalEulers = spawnOrigin.eulerAngles;
-        //spawnOrigin.LookAt(Camera.main.transform);
-        spawnOrigin.rotation = Camera.main.transform.rotation;
-
+        spawnOrigin.LookAt(Camera.main.transform);
+        spawnOrigin.forward = -spawnOrigin.forward;
+        Debug.Log($"DicePrefab count: {dicePrefabs.Length}");
         foreach (GameObject diePrefab in dicePrefabs)
         {
-            GameObject spawnedDie = GameObject.Instantiate(diePrefab, spawnOrigin);
+            GameObject spawnedDie = Instantiate(diePrefab, spawnOrigin);
             spawnedDie.transform.localPosition = dicePositionOffsets[prefabIndex];
             spawnedDie.transform.localEulerAngles = Vector3.zero;
             spawnedDie.transform.parent = null;
+            spawnedDie.transform.localScale = diePrefab.transform.localScale;
             PrepareSpawnedDie(spawnedDie);
             SpawnedObjects.Add(spawnedDie);
             prefabIndex++;
@@ -133,10 +87,10 @@ public class SpawnDice : MonoBehaviour
 
     void Despawn()
     {
-        Debug.Log("Calling despawn");
+        Debug.Log("Despawning");
         foreach (GameObject spawnedObject in SpawnedObjects)
         {
-            GameObject.Destroy(spawnedObject);
+            Destroy(spawnedObject);
         }
         SpawnedObjects = new List<GameObject>();
     }
