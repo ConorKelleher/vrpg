@@ -30,10 +30,10 @@ public class SpawnDice : MonoBehaviour
             Spawn();
         }
 
-        //if (!pressing && SpawnedObjects.Count > 0)
-        //{
-        //    Despawn();
-        //}
+        if (!pressing && SpawnedObjects.Count > 0)
+        {
+            Despawn();
+        }
     }
 
     void PrepareSpawnedDie(GameObject spawnedDie)

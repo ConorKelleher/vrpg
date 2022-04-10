@@ -16,6 +16,7 @@ public class IKControl : MonoBehaviour
     public Transform headBone = null;
     public Transform spineBone = null;
     private Vector3 startSpineUp;
+    private Vector3 spinePositionAdjustment;
     private Quaternion startRotationBetween;
     private Quaternion spineStartRotation;
     private Quaternion spineLocalRotationIKGoal;
@@ -52,7 +53,9 @@ public class IKControl : MonoBehaviour
         spineBone.rotation = rotationBefore;
 
         // Headbone will have moved due to above rotation, so need to RE-set the position to match goal
+        Vector3 spinePositionBeforeAdjustment = spineBone.position;
         spineBone.position = headTarget.position + torsoLine.normalized * headToChestOffset;
+        spinePositionAdjustment = spineBone.position - spinePositionBeforeAdjustment;
         headBone.position = headTarget.position;
         headBone.eulerAngles = headTarget.eulerAngles;
 
@@ -69,11 +72,11 @@ public class IKControl : MonoBehaviour
         animator.SetLookAtPosition(headTarget.position + headTarget.forward);
 
         // Set the right hand target position and rotation
-        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.position);
+        animator.SetIKPosition(AvatarIKGoal.RightHand, rightHandTarget.position - spinePositionAdjustment);
         animator.SetIKRotation(AvatarIKGoal.RightHand, rightHandTarget.rotation);
 
         // Set the right hand target position and rotation
-        animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandTarget.position);
+        animator.SetIKPosition(AvatarIKGoal.LeftHand, leftHandTarget.position - spinePositionAdjustment);
         animator.SetIKRotation(AvatarIKGoal.LeftHand, leftHandTarget.rotation);
     }
 }

@@ -4813,7 +4813,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568984712}
   m_LocalRotation: {x: 0.08002093, y: 0.073776536, z: -0.7268295, w: 0.67813903}
-  m_LocalPosition: {x: 0.0864, y: -0.0527, z: -0.1215}
+  m_LocalPosition: {x: 0, y: -0.0527, z: -0.1215}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5362,8 +5362,8 @@ MonoBehaviour:
   RightHandTarget: {fileID: 1859492612}
   LeftHandTarget: {fileID: 1109150044}
   HeadController: {fileID: 1964745536}
-  RightHandController: {fileID: 1568984713}
-  LeftHandController: {fileID: 800658639}
+  RightHandController: {fileID: 541096546}
+  LeftHandController: {fileID: 1728657556}
 --- !u!1 &1728657555
 GameObject:
   m_ObjectHideFlags: 0
@@ -5763,7 +5763,7 @@ PrefabInstance:
     - target: {fileID: 4283425761326543017, guid: 1f4d373a613d0466fbd8849470265852,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1f4d373a613d0466fbd8849470265852, type: 3}
